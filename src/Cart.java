@@ -51,6 +51,16 @@ public class Cart {
         }
     }
 
+    public double getTotalPrice() {
+        double total = 0.0;
+        for (Map.Entry<Product, Integer> entry : items.entrySet()) {
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            total += product.getPrice() * quantity;
+        }
+        return total;
+    }
+
     public void display() {
         if (items.isEmpty()) {
             System.out.println("Cart is empty.");
@@ -63,6 +73,29 @@ public class Cart {
             int quantity = entry.getValue();
             System.out.println(quantity + "x " + product.getName() + " - $" + product.getPrice() * quantity);
         }
+
+    }
+
+    public double getTotalWeight() {
+        double totalWeight = 0.0;
+        for (Map.Entry<Product, Integer> entry : items.entrySet()) {
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            if (product instanceof Shippable) {
+                totalWeight += ((Shippable) product).getWeight() * quantity;
+            }
+        }
+        return totalWeight;
+    }
+
+
+    public Map<Product, Integer> getItems() {
+        return items;
+    }
+
+    public void clear() {
+        items.clear();
+        System.out.println("Cart has been cleared.");
     }
 
 

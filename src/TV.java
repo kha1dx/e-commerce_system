@@ -2,10 +2,9 @@ public class TV extends Product implements Shippable{
     double weight;
     double shippingCost;
 
-    public TV(String name, double price, int quantity, double weight, double shippingCost) {
+    public TV(String name, double price, int quantity, double weight) {
         super(name, price, quantity);
         this.weight = weight;
-        this.shippingCost = shippingCost;
     }
 
     @Override

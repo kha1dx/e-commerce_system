@@ -3,13 +3,11 @@ import java.time.LocalDate;
 public class Biscuit extends Product implements Expirable, Shippable {
     private String expiryDate;
     private double weight;
-    private double shippingCost;
 
-    public Biscuit(String name, double price, int quantity, double weight, String expiryDate, double shippingCost) {
+    public Biscuit(String name, double price, int quantity, double weight, String expiryDate) {
         super(name, price, quantity);
         this.weight = weight;
         this.expiryDate = expiryDate;
-        this.shippingCost = shippingCost;
     }
 
     @Override
