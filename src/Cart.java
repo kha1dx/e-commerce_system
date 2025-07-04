@@ -3,11 +3,9 @@ import java.util.Map;
 
 public class Cart {
     private Map<Product, Integer> items;
-    private int size;
 
     public Cart(){
         this.items = new HashMap<>();
-        this.size = 0;
     }
     public void add(Product product, int addedQuantity) {
         //edge case to handle if the user wants
@@ -33,7 +31,6 @@ public class Cart {
         // add the new quantity and update the map.
 
         items.put(product, newQuantity);
-        size ++;
 
         System.out.println(addedQuantity + "x " + product.getName() + " added to cart.");
     }
@@ -47,7 +44,6 @@ public class Cart {
         int currentQuantity = items.get(product);
         if (removedQuantity >= currentQuantity) {
             items.remove(product);
-            size--;
             System.out.println("Removed all " + product.getName() + " from cart.");
         } else {
             items.put(product, currentQuantity - removedQuantity);
