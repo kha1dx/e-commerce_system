@@ -1,10 +1,10 @@
 import java.time.LocalDate;
 
 public class Biscuit extends Product implements Expirable, Shippable {
-    private String expiryDate;
+    private LocalDate expiryDate;
     private double weight;
 
-    public Biscuit(String name, double price, int quantity, double weight, String expiryDate) {
+    public Biscuit(String name, double price, int quantity, double weight, LocalDate expiryDate) {
         super(name, price, quantity);
         this.weight = weight;
         this.expiryDate = expiryDate;
@@ -14,8 +14,7 @@ public class Biscuit extends Product implements Expirable, Shippable {
     public boolean isExpired() {
 
         LocalDate today = LocalDate.now();
-        LocalDate expiry = LocalDate.parse(expiryDate);
-        return expiry.isBefore(today);
+        return expiryDate.isBefore(today);
 
     }
 
@@ -26,7 +25,7 @@ public class Biscuit extends Product implements Expirable, Shippable {
 
     @Override
     public void setExpirationDate(String expiryDate) {
-        this.expiryDate = LocalDate.parse(expiryDate).toString();
+        this.expiryDate = LocalDate.parse(expiryDate);
     }
 
 

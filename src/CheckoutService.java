@@ -4,18 +4,21 @@ import java.util.Map;
 public class CheckoutService {
     public static void checkout(Customer customer, Cart cart) {
         double totalCost = cart.getTotalPrice();
+        double subtotal = totalCost;
         double customerBalance = customer.getBalance();
         double totalWeight = cart.getTotalWeight();
         double shippingCost ;
         double shippingFee = 5.0; // Base shipping fee
         Map<Product, Integer> items = cart.getItems();
 
+
+        //empty cart case
         if (items.isEmpty()) {
             System.out.println("Error: Cart is empty.");
             return;
         }
 
-
+        //check eligibility of products and expired products
         for (Map.Entry<Product, Integer> entry : items.entrySet()) {
             Product product = entry.getKey();
             int quantity = entry.getValue();
@@ -36,25 +39,28 @@ public class CheckoutService {
 
         }
 
-
+        //calculate shipping cost
         shippingCost = cart.getTotalWeight() * shippingFee;
+        //updating total cost
         totalCost += shippingCost;
-        double subtotal = totalCost - shippingCost;
 
-
+        //checking and deducting customers balance
         boolean flag = customer.deductBalance(totalCost);
+
+
+        //exits if customer does not have enough balance
         if(!flag){
             return;
         }
 
-        if (flag) {
-            for (Map.Entry<Product, Integer> entry : items.entrySet()) {
-                int newQuantity = entry.getKey().getQuantity() - entry.getValue();
-                entry.getKey().updateQuantity(newQuantity);
-            }
+        //updating the quantity of products in the stock
+
+        for (Map.Entry<Product, Integer> entry : items.entrySet()) {
+            int newQuantity = entry.getKey().getQuantity() - entry.getValue();
+            entry.getKey().updateQuantity(newQuantity);
         }
 
-
+        //calculating total weigh
         if (totalWeight > 0) {
             System.out.println("\n** Shipment notice **");
             for (Map.Entry<Product, Integer> entry : items.entrySet()) {
