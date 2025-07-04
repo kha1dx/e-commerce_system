@@ -8,10 +8,7 @@ public class Mobile extends Product implements Shippable{
         this.shippingCost = shippingCost;
     }
 
-    @Override
-    public double getShippingCost() {
-        return this.shippingCost;
-    }
+
 
     @Override
     public double getWeight() {

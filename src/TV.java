@@ -9,11 +9,6 @@ public class TV extends Product implements Shippable{
     }
 
     @Override
-    public double getShippingCost() {
-        return this.shippingCost;
-    }
-
-    @Override
     public double getWeight() {
         return this.weight;
     }
